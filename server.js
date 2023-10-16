@@ -14,7 +14,7 @@
 ********************************************************************************/
 
 const express = require("express");
-const legoData = require("../SASS/modules/legoSets");
+const legoData = require("./modules/legoSets");
 const path = require("path");
 
 const app = express();

@@ -1,0 +1,241 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lego Collection</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+       body {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        
+        .top-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Style for the label */
+        .label {
+            font-weight: bold;
+        }
+
+        /* Show the dropdown when hovering over the label */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+    <div class="top-left">
+        <p><a href = "home.html" > Lego Collection</a></p>
+    </div>
+    <div class="top-right">
+        <p><a href = "about.html" >About</a></p>
+
+
+    <div class="dropdown">
+        <span class="label">Theme</span>
+        <div class="dropdown-content">
+            <a href="/lego/sets?theme=Theme1">Theme1</a>
+            <a href="/lego/sets?theme=Theme2">Theme2</a>
+            <a href="/lego/sets?theme=Theme3">Theme3</a>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lego Collection</title>
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <style>
+    .top-right-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+}
+.indented {
+    text-indent: 42px; 
+}
+
+/* .rounded-lg {
+  border-radius: 0.5rem; 
+}
+
+.image-container {
+  overflow: hidden; 
+  border-radius: 0.5rem; 
+} */
+
+/* Add rounded corners to the entire grid */
+.cards-container.rounded-lg {
+  border-radius: 0.5rem; /* Adjust the value as needed for your desired level of rounding */
+}
+
+/* Define a class for rounded corners on images */
+.rounded-lg {
+  border-radius: 0.5rem; /* Adjust the value as needed for your desired level of rounding */
+}
+
+
+
+
+  </style>
+
+</head>
+
+<body tabindex="-1">
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <br>
+        <a class="btn btn-ghost normal-case text-xl" href="/">Lego Collection</a>
+      </div>
+      <div class="top-right-menu">
+        <ul class="menu menu-horizontal">
+            <br>
+          <li><a href="/about">About</a>
+            <span>&nbsp;</span>
+            <details>
+              <summary>Theme</summary>
+              <ul class="p-2 bg-base-100 right-0">
+                <li><a href="/lego/sets?theme=technic">Technic</a></li>
+                <li><a href="/lego/sets?theme=classic town">Classic Town</a></li>
+                <li><a href="/lego/sets?theme=supplemental">Supplemental</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  <br />
+
+  <br>
+
+  <div class="container mx-auto">
+
+
+    <div class="hero bg-base-200 rounded-lg p-6">
+      <div class="hero-content text-center ">
+        <div class="max-w-md">
+          <h1> Welcome</h1>
+
+          <p> Unleash your inner builder and embark on a fascinating</p>
+          <p class="indented">journey through the colorful realm of Lego.</p>
+          <br>
+      
+          <div style="text-align: center;">
+            <a href="/lego/sets" class="btn btn-primary">Get Started Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <br>
+
+    <div class="cards-container rounded-lg">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="image-container">
+            <figure>
+              <img class="w-full rounded-lg" src="https://cdn.rebrickable.com/media/sets/001-1.jpg" alt="Lego set" />
+            </figure>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">Gears</h2>
+            <p>This set was released in America (USA/CAN) by Samsonite in 1965.</p>
+            <div class="card-actions justify-end">
+              <a href="/lego/sets/001-1" class="btn btn-primary">View</a>
+            </div>
+          </div>
+        </div>
+      
+        <div class="card bg-base-100 shadow-xl">
+          <div class="image-container">
+            <figure>
+              <img class="w-full rounded-lg" src="https://cdn.rebrickable.com/media/sets/028-1.jpg" alt="Lego Set" />
+            </figure>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">Nursery Furniture</h2>
+            <p>Classic Duplo set - create a nursery for your minis.</p>
+            <div class="card-actions justify-end">
+              <a href="/lego/sets/028-1" class="btn btn-primary">View</a>
+            </div>
+          </div>
+        </div>
+      
+        <div class="card bg-base-100 shadow-xl">
+          <div class="image-container">
+            <figure>
+              <img class="w-full rounded-lg" src="https://cdn.rebrickable.com/media/sets/03093-1.jpg" alt="Lego Set" />
+            </figure>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">The Race to Build It Board Game</h2>
+            <p>Classic game - released in 1999</p>
+            <div class="card-actions justify-end">
+              <a href="/lego/sets/03093-1" class="btn btn-primary">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      
+      
+    </div>
+</body>
+
+</html>
