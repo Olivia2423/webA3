@@ -24,16 +24,6 @@
 ::after {
   --tw-content: '';
 }
-/*******************************************/
-.cards-container {
-  display: flex;
-  justify-content: space-between;
-}
-.card {
-  flex: 1;
-  margin: 0 10px;
-  max-width: 30%;
-}
 
 /*
 1. Use a consistent sensible line-height in all browsers.
