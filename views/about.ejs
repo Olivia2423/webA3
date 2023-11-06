@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lego Collection</title>
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <style>
+    .top-right-menu {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+    }
+
+    .indented {
+      text-indent: 42px;
+    }
+    .indented2 {
+      text-indent: 160px;
+    }
+  </style>
+
+</head>
+
+<body tabindex="-1">
+  <%- include('partials/navbar', {page: '/about'}) %>
+
+
+  <br />
+
+  <div class="container mx-auto">
+    <div class="hero bg-base-200 rounded-lg p-6">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">About</h1>
+          <p> Everything you want to know about me - the designer &amp; 
+            <p class="indented2">developer.</p>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="column" style="float: left; width: 50%;">
+          <!-- <img src="https://th.bing.com/th/id/OIP.s3PkGGgwKsl-a8bdHFcuVgHaE7?w=257&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="profile" /> -->
+          <img src="https://media.istockphoto.com/id/1483011696/photo/tennis-ball-racket-and-court-ground-with-mockup-space-blurred-background-or-outdoor-sunshine.webp?b=1&s=170667a&w=0&k=20&c=kM0BlIxsV7KO3SEOcQ2szbu04c1uvYGs5V06agGJLvc=" alt="profile" />
+        </div>
+        <br>
+        <div class="column" style="float: left; width: 50%;">
+          <p>My name is Olivia Christy, and I'm currently studying at Seneca Polytechnic.</p>
+          <br>
+          <p>I am an international student who recently came to Canada to study.I'm in the BSD(Honors Bachelor of Software Development) program.
+            The courses I currently take in this program are; C++, Web programming, Advanced database technologies, presentation skills, business requirements analysis using OO Models and Communications.
+              I love to play tennis and working out during my free time.</p>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

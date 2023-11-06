@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lego Collection</title>
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <style>
+    .top-right-menu {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+    }
+
+    .indented {
+      text-indent: 42px;
+    }
+    .indented2 {
+      text-indent: 160px;
+    }
+  </style>
+
+</head>
+
+<body tabindex="-1">
+  <%- include('partials/navbar', {page:''}) %>
+
+
+  <br />
+
+  <div class="container mx-auto">
+    <div class="hero bg-base-200 rounded-lg p-6">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold"><%= set.name %></h1>
+          <p>Below, you will find detailed information about the set: <%= set.name %></p>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <br>
+    <br>
+
+    <div class="container">
+      <div class="column" style="float: left; width: 50%;">
+        <img src="<%= set.img_url %>" alt="Lego Set Image" />
+      </div>
+      <br>
+      <div class="column" style="float: left; width: 50%;">
+        <p>Name: <%= set.name %></p>
+        <p>Year Released: <%= set.year %></p>
+        <p>Theme: <%= set.theme %></p>
+        <p>Number of Parts: <%= set.num_parts %></p>
+        <p id="quote"></p>
+        <a href="#" onclick="history.back(); return false;">Go Back</a>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("https://quotable.io/random")
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("quote").innerHTML = `"${data.content}" - ${data.author}`;
+        })
+        .catch(error => console.error("Error fetching quote:", error));
+    });
+  </script>
+</body>
+
+</html>

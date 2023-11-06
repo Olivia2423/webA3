@@ -16,32 +16,14 @@
   </style>
 </head>
 <body tabindex="-1">
-  <div class="navbar bg-base-100">
-    <div class="flex-1">
-      <a class="btn btn-ghost normal-case text-xl" href="/">Lego Collection</a>
-    </div>
-    <div class="top-right-menu">
-      <ul class="menu menu-horizontal">
-        <li><a href="/about">About</a>
-          <details>
-            <summary>Theme</summary>
-            <ul class="p-2 bg-base-100 right-0">
-              <li><a href="/lego/sets?theme=technic">Technic</a></li>
-              <li><a href="/lego/sets?theme=classic town">Classic Town</a></li>
-              <li><a href="/lego/sets?theme=supplemental">Supplemental</a></li>
-            </ul>
-          </details>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <br />
+  <%- include('partials/navbar', {page: '/404'}) %>
 
   <div class="container mx-auto">
     <div class="hero bg-base-200 rounded-lg p-6">
       <div class="hero-content text-center">
         <div class="max-w-md">
           <h1 class="text-5xl font-bold">404 - Page Not Found</h1>
+          <p><%= message %></p>
           <p>Oops! WWE ARE SORRY, BUT THE PAGE YOU REQUESTED WAS NOT FOUND.</p>
           <img src="https://colorlib.com/wp/wp-content/uploads/sites/2/404-error-template-3.png" alt="404 Error Image" />
         </div>

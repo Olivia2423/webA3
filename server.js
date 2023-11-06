@@ -7,9 +7,9 @@
 * 
 * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
 * 
-* Name: Olivia Christy Kuitchoua Kewang Student ID: 167357219 Date: 10/15/2023
+* Name: Olivia Christy Kuitchoua Kewang Student ID: 167357219 Date: 11/05/2023
 *
-* Published URL: https://github.com/Olivia2423/Assignment-3
+* Published URL: https://turquoise-dibbler-cap.cyclic.cloud/
 *
 ********************************************************************************/
 
@@ -19,6 +19,8 @@ const path = require("path");
 
 const app = express();
 const port = 8080;
+
+app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -30,29 +32,33 @@ legoData.initialize()
     // Define routes
 
     app.get("/", (req, res) => {
-      res.sendFile(path.join(__dirname, "/views/home.html"));
+      res.render("home");
     });
 
     // Route for "/about"
     app.get("/about", (req, res) => {
-      res.sendFile(path.join(__dirname, "/views/about.html"));
+      res.render("about");
     });
 
-    // Route for "/lego/sets"
+    //Route for "/lego/sets"
     app.get("/lego/sets", (req, res) => {
       const theme = req.query.theme; // Check if the "theme" query parameter is present
       if (theme) {
         legoData.getSetsByTheme(theme)
           .then((sets) => {
-            res.json(sets);
+            if (sets.length === 0) {
+              res.status(404).render("404", { message: "Unable to find requested set for the theme" });
+            } else {
+              res.render("sets", { sets: sets });
+            }
           })
           .catch((error) => {
-            res.status(404).json({ error: "No matching sets found for the specified theme." });
+            res.status(500).json({ error: "An error occurred while fetching Lego sets." });
           });
       } else {
         legoData.getAllSets()
           .then((sets) => {
-            res.json(sets);
+            res.render("sets", { sets: sets });
           })
           .catch((error) => {
             res.status(500).json({ error: "An error occurred while fetching Lego sets." });
@@ -60,16 +66,16 @@ legoData.initialize()
       }
     });
 
-    // Route for "/lego/sets/:id-demo"
+    //Route for "/lego/sets/:id-demo"
     app.get("/lego/sets/:set_num", (req, res) => {
       const setNum = req.params.set_num;
 
       legoData.getSetByNum(setNum)
         .then((set) => {
           if (set) {
-            res.json(set);
+            res.render("set", { set: set });
           } else {
-            res.status(404).json({ error: "Set not found." });
+            res.status(404).render("404", { message: "Unable to find requested set" });
           }
         })
         .catch((error) => {
@@ -79,7 +85,7 @@ legoData.initialize()
 
     // Route for handling custom 404 errors
     app.use((req, res) => {
-      res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
+      res.status(404).render("404", { message: "I'm sorry, we're unable to find what you're looking for" });
     });
 
     // Start the server
@@ -90,3 +96,5 @@ legoData.initialize()
   .catch((error) => {
     console.error('Error in initialize:', error);
   });
+
+  
