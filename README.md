@@ -5,6 +5,8 @@ Part 1: Getting Started (Files & Directories)
 Create a new folder somewhere on your system to store the assignment.
 Within this folder, create a "data" folder and a "modules" folder.
 Place the "themeData.json" file in the "data" folder.
+ You can find the specific "sets.csv" file (available within a .zip file)
+[sets (1).zip](https://github.com/Olivia2423/webA3/files/14217336/sets.1.zip)
 Create a new file called "legoSets.js" in the "modules" folder.
 Download the "sets" dataset in a .csv format from Rebrickable.com and convert it to JSON format.
 Part 2: Writing legoSets.js
