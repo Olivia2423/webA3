@@ -1,13 +1,13 @@
 
 /********************************************************************************
-* BTI325 – Assignment 05
+* BTI325 – Assignment 06
 * 
 * I declare that this assignment is my own work in accordance with Seneca's
 * Academic Integrity Policy:
 * 
 * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
 * 
-* Name: Olivia Christy Kuitchoua Kewang Student ID: 167357219 Date: 11/19/2023
+* Name: Olivia Christy Kuitchoua Kewang Student ID: 167357219 Date: 12/10/2023
 *
 * Published URL: https://turquoise-dibbler-cap.cyclic.cloud/
 *
@@ -16,6 +16,8 @@
 const express = require("express");
 const legoData = require("./modules/legoSets");
 const path = require("path");
+const authData = require('./modules/auth-service');
+const clientSessions = require('client-sessions');
 require('dotenv').config();
 
 
@@ -27,10 +29,33 @@ app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({extended:true}));
 
+app.use(
+  clientSessions({
+    cookieName: 'session', // this is the object name that will be added to 'req'
+    secret: process.env.SESSION_SECRET, // this should be a long un-guessable string.
+    duration: 2 * 60 * 1000, // duration of the session in milliseconds (2 minutes)
+    activeDuration: 1000 * 60, // the session will be extended by this many ms each request (1 minute)
+  })
+);
+
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+ });
+
+ function ensureLogin(req, res, next) {
+  if (!req.session.user) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+}
+
 app.use(express.json());
 app.use(express.static("public"));
 
 legoData.initialize()
+  .then(authData.initialize)
   .then(() => {
     console.log("Lego data initialized successfully.");
 
@@ -44,6 +69,75 @@ legoData.initialize()
     app.get("/about", (req, res) => {
       res.render("about");
     });
+
+    ////////////////////********************************///////////////////////////
+   // Route for "/login"
+app.get("/login", (req, res) => {
+  // Pass an empty userName or retrieve it from the session if available
+  const userName = req.session.user ? req.session.user.userName : "";
+  res.render("login", { userName: userName, errorMessage: "" });
+});
+
+
+
+    // Route for "/register"
+app.get("/register", (req, res) => {
+  // Pass an initial value for errorMessage and userName
+  res.render("register", { successMessage: "", errorMessage: "", userName: "" });
+});
+
+
+
+   // POST route for "/register"
+app.post("/register", (req, res) => {
+  const userData = req.body;
+
+  authData.registerUser(userData)
+    .then(() => {
+      res.render("register", { successMessage: "User created", userName: req.body.userName, errorMessage: "" });
+    })
+    .catch((err) => {
+      res.render("register", { errorMessage: err, successMessage: "", userName: req.body.userName });
+    });
+});
+
+  
+
+    // POST route for "/login"
+// POST route for "/login"
+app.post("/login", (req, res) => {
+  req.body.userAgent = req.get('User-Agent');
+
+  authData.checkUser(req.body)
+    .then((user) => {
+      req.session.user = {
+        userName: user.userName,
+        email: user.email,
+        loginHistory: user.loginHistory
+      };
+      res.redirect('/lego/sets');
+    })
+    .catch((err) => {
+      // Pass errorMessage and userName to the view
+      res.render("login", { errorMessage: err.message, userName: req.body.userName });
+    });
+});
+
+    // Route for "/logout"
+    app.get("/logout", (req, res) => {
+      req.session.reset();
+      res.redirect('/');
+    });
+
+    // Route for "/userHistory"
+    app.get("/userHistory", ensureLogin, (req, res) => {
+      res.render("userHistory");
+    });
+
+
+
+
+    ///////////////////******************************/////////////////////////////
 
     //Route for "/lego/sets"
     app.get("/lego/sets", (req, res) => {
@@ -88,9 +182,9 @@ legoData.initialize()
           res.status(404).json({ error: "Set not found." });
         });
     });
-//////////////////////////////////////
+/********/////////////////////////////////////
     //Routes for "lego/addSet" -GET
-    app.get("/lego/addSet", (req, res) => {
+    app.get("/lego/addSet", ensureLogin, (req, res) => {
       legoData.getAllThemes()
         .then((themeData) => {
           res.render("addSet", { themes: themeData });
@@ -101,7 +195,7 @@ legoData.initialize()
     });
 
     //Route for "lego/addSet" -POST
-    app.post("/lego/addSet", (req, res) => {
+    app.post("/lego/addSet", ensureLogin, (req, res) => {
       const setData = req.body;
 
       legoData.addSet(setData)
@@ -116,7 +210,7 @@ legoData.initialize()
   //////////////////////////////////////////////////
     
      // GET "/lego/editSet/:num"
- app.get("/lego/editSet/:num", (req, res) => {
+ app.get("/lego/editSet/:num", ensureLogin, (req, res) => {
   const setNum = req.params.num;
 
   Promise.all([legoData.getSetByNum(setNum), legoData.getAllThemes()])
@@ -133,7 +227,7 @@ legoData.initialize()
  });
 
 // POST "/lego/editSet"
- app.post("/lego/editSet", (req, res) => {
+ app.post("/lego/editSet", ensureLogin, (req, res) => {
   const setNum = req.body.set_num;
   const setData = req.body;
 
@@ -149,7 +243,7 @@ legoData.initialize()
   /////////////////////////////////////////
 
   // GET "/lego/deleteSet/:num"
- app.get("/lego/deleteSet/:num", (req, res) => {
+ app.get("/lego/deleteSet/:num", ensureLogin, (req, res) => {
     const setNum = req.params.num;
 
     legoData.deleteSet(setNum)
