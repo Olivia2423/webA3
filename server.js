@@ -1,13 +1,7 @@
 
 /********************************************************************************
-* BTI325 – Assignment 03
-* 
-* I declare that this assignment is my own work in accordance with Seneca's
-* Academic Integrity Policy:
 * 
 * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
-* 
-* Name: Olivia Christy Kuitchoua Kewang Student ID: 167357219 Date: 11/19/2023
 *
 * Published URL: https://turquoise-dibbler-cap.cyclic.cloud/
 *
