@@ -1,9 +1,8 @@
 /********************************************************************************
 * 
-* I declare that this assignment is my own work in accordance with Seneca's
-* Academic Integrity Policy:
-
-
+*
+* https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
+*
 * Published URL: https://turquoise-dibbler-cap.cyclic.cloud/
 
 *
