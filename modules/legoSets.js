@@ -1,7 +1,7 @@
 /********************************************************************************
 * 
 *
-* https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
+
 *
 * Published URL: https://turquoise-dibbler-cap.cyclic.cloud/
 
